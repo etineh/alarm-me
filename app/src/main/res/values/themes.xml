@@ -1,0 +1,23 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Alarmme" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.Alarmme" parent="Base.Theme.Alarmme" />
+
+    <color name="cardColor">@color/cardLight</color>
+
+    <color name="textColor">@color/textLight</color>
+    <color name="iconColor">@color/textLight</color>
+
+    <color name="greenColor">@color/greenLight</color>
+    <color name="cover_photo_bg">#8181D3</color>
+
+    <color name="defaultColorTV">@color/defaultBlack</color>
+    <color name="highlightColor">@color/appLightTrans10</color>
+
+    <color name="background_trans50">@color/appLightTrans50</color>
+
+</resources>

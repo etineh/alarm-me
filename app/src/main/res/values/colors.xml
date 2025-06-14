@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="blackLess">#041535</color>
+
+    <color name="appBlue30">#4D2563EB</color>
+    <color name="appBlue50">#802563EB</color>
+
+    <color name="appDark">#141118</color>   <!-- background colour -->
+    <color name="appLight">#F8F8FA</color>
+<!--    <color name="appDark">#191B20</color>   &lt;!&ndash; background colour &ndash;&gt;-->
+
+    <color name="appBlue">#2563EB</color>
+    <color name="coolBlue">#ADD8E6</color>
+
+    <color name="iconBackgroundLight">#EBF3FE</color>
+<!--    <color name="iconBackgroundDark">#141B2A</color>-->
+
+    <color name="light_gray">#B8C2CC</color> <!-- A soft, light gray -->
+    <color name="gray">#6E7D91</color>      <!-- A medium gray -->
+
+    <color name="fullTransparent">#00FFFFFF</color>    <!-- full transparent -->
+    <color name="appDarkTrans70">#B3141118</color>
+    <color name="appLightTrans70">#B3F8F8FA</color>
+
+    <color name="appDarkTrans90">#E5141118</color>
+    <color name="appLightTrans90">#E5F8F8FA</color>
+<!--    <color name="appDarkTrans50">#80141118</color>-->
+<!--    <color name="appLightTrans50">#80F8F8FA</color>-->
+    <color name="appDarkTrans50">#80000000</color>
+    <color name="appLightTrans50">#80FFFFFF</color>
+
+    <color name="appLightTrans10">#1AFFFFFF</color>
+<!--    <color name="appDarkTrans10">#1A000000</color>-->
+
+
+    <color name="textLight">#111827</color>
+    <color name="textDark">#F5F5F5</color>
+
+    <color name="primaryLight">#2563EB</color>
+    <color name="primaryDark">#EBF3FE</color>
+
+    <color name="successLight">#34C759</color>
+
+    <color name="greenDark">#34C759</color>
+    <color name="greenLight">#168316</color>
+
+    <color name="ErrorDark">#FF3B30</color>
+
+    <color name="outlineLight">#E0E1E2</color>
+    <color name="outlineDark">#141B2A</color>
+
+    <color name="grayLight">#7D7D7E</color>
+    <color name="grayDark">#AEAFB1</color>
+
+    <color name="formLight">#EFEFF0</color>
+    <color name="formDark">#141118</color>
+
+    <color name="cardLight">#FFFFFF</color>
+    <color name="cardDark">#141B2A</color>
+
+    <color name="defaultBlack">#B3000000</color>
+    <color name="defaultWhite">#B3FFFFFF</color>
+
+</resources>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/cardColor"
+    android:elevation="4dp"
+    android:padding="2dp">
+
+    <!-- Back Button -->
+
+    <ImageView
+        android:id="@+id/backArrowIV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="5dp"
+        android:contentDescription="Back"
+        android:padding="10dp"
+        android:src="@drawable/baseline_arrow_back_24"
+        app:tint="@color/textColor" />
+
+    <!-- Title -->
+
+    <TextView
+        android:id="@+id/headingTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="5dp"
+        android:layout_toStartOf="@+id/iconStartIV"
+        android:layout_toEndOf="@+id/backArrowIV"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Create"
+        android:textColor="@color/textColor"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/iconStartIV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="7dp"
+        android:layout_toStartOf="@id/iconMiddleIV"
+        android:padding="10dp"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:visibility="gone"
+        app:tint="@color/textColor" />
+
+    <!-- Calendar Icon -->
+    <ImageView
+        android:id="@+id/iconMiddleIV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="7dp"
+        android:layout_toStartOf="@+id/iconEndIV"
+        android:padding="10dp"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:visibility="gone"
+        app:tint="@color/textColor" />
+
+    <ImageView
+        android:id="@+id/iconEndIV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="15dp"
+        android:padding="10dp"
+        android:src="@drawable/baseline_arrow_back_24"
+        android:visibility="gone"
+        app:tint="@color/textColor" />
+</RelativeLayout>

@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Alarm-me</string>
+
+    <string name="from_cap">FROM</string>
+    <string name="to_cap">TO</string>
+    <string name="result_cap">RESULT</string>
+    <string name="time">Time </string>
+    <string name="alarm">Alarm</string>
+    <string name="setAlarm">Set alarm </string>
+    <string name="editAlarm">Edit alarm </string>
+    <string name="format"><u>Format</u></string>
+    <string name="am">AM</string>
+    <string name="pm">PM</string>
+    <string name="one_time">One-time</string>
+    <string name="daily">Daily</string>
+    <string name="s">S</string>
+    <string name="m">M</string>
+    <string name="t">T</string>
+    <string name="w">W</string>
+    <string name="f">F</string>
+    <string name="sound">Sound</string>
+    <string name="snooze">Snooze</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="labelSub">Label (e.g, Study time 📚)</string>
+    <string name="mins">mins</string>
+    <string name="selectSound">Select sound</string>
+    <string name="everyday">Everyday</string>
+    <string name="noAlarmYet">No alarm yet. \n\n<u> <i> Create </i> </u></string>
+    <string name="deleteNoteSub">Are you sure you want to delete all alarm? This action cannot be undone.</string>
+    <string name="deleteNote">Delete Note?</string>
+    <string name="deleteAllAlarm">Delete All Alarm?</string>
+    <string name="delete">Delete</string>
+    <string name="deleteAll">Delete all</string>
+    <string name="alarmRinging">Your alarm is ringing!</string>
+    <string name="stop">Stop</string>
+    <string name="missed">Missed</string>
+    <string name="cancel">Cancel</string>
+    <string name="failed_permit">No alarm permission yet!</string>
+
+</resources>

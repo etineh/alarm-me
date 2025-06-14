@@ -1,0 +1,21 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Alarmme" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    </style>
+
+    <color name="cardColor">@color/cardDark</color>
+
+    <color name="textColor">@color/textDark</color>
+    <color name="iconColor">@color/coolBlue</color>
+
+    <color name="greenColor">@color/greenDark</color>
+    <color name="cover_photo_bg">#1E2B47</color>
+
+    <color name="defaultColorTV">@color/defaultWhite</color>
+    <color name="highlightColor">@color/appBlue30</color>
+
+    <color name="background_trans50">@color/appDarkTrans50</color>
+
+</resources>
