@@ -2,7 +2,9 @@
 
 **Alarm-me** is a modern and smart alarm clock app built in **Kotlin**, designed to showcase core Android development skills including alarm scheduling, foreground services, system integrations, and clean architecture.
 
-<img width="371" alt="Screenshot 2025-06-14 at 18 20 37" src="https://github.com/user-attachments/assets/98d0ba9b-1a8b-4211-95ec-e6787983c9fe" />
+<p align="center">
+  <img width="300" alt="Screenshot 2025-06-14 at 18 20 37" src="https://github.com/user-attachments/assets/98d0ba9b-1a8b-4211-95ec-e6787983c9fe" />
+</p>
 
 
 ---
