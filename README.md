@@ -89,7 +89,7 @@
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/yourusername/alarm-me.git
+git clone https://github.com/etineh/alarm-me.git
 ```
 2. Open the project in Android Studio.
 
@@ -105,6 +105,8 @@ If you found this project helpful or inspiring:
 📥 Share with fellow devs
 
 🧑‍💼 Use it in your own projects
+
+---
 
 📄 License
 MIT License – feel free to use and modify!
