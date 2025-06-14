@@ -93,7 +93,7 @@ git clone https://github.com/etineh/alarm-me.git
 ```
 2. Open the project in Android Studio.
 
-3. Build and run on a physical device or emulator (Android 12+ preferred).
+3. Build and run on a physical device or emulator.
 
 ---
 
