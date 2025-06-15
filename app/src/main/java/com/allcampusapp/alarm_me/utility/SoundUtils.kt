@@ -5,6 +5,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.media.AudioManager
 import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
@@ -12,6 +13,7 @@ import androidx.core.content.ContextCompat
 import com.allcampusapp.alarm_me.constant.KVal
 import com.allcampusapp.alarm_me.extension.convertTo24Hour
 import com.allcampusapp.alarm_me.extension.daysActiveIndex
+import com.allcampusapp.alarm_me.extension.setDelay
 import com.allcampusapp.alarm_me.extension.stopVibration
 import com.allcampusapp.alarm_me.extension.vibrateIndefinitely
 import com.allcampusapp.alarm_me.model.AlarmModel
@@ -50,20 +52,22 @@ object SoundUtils {
         return ringtoneList
     }
 
-    fun scheduleAllAlarms(context: Context, alarms: List<AlarmModel>) {
+    fun scheduleAllAlarms(context: Context, alarms: List<AlarmModel> = LocalStorageUtils.getAllAlarm(context)) {
         for (alarm in alarms) {
-            if (alarm.alarmIsActive) {
-                scheduleAlarm(context, alarm)
-            } else {
-//                cancelAlarm(context, alarm)
-            }
+            if (alarm.alarmIsActive) scheduleAlarm(context, alarm)
         }
     }
 
+    fun cancelAllAlarms(context: Context, alarmList: List<AlarmModel> = LocalStorageUtils.getAllAlarm(context)) {
+        for(alarm in alarmList) {
+            cancelAlarm(context, alarm)
+        }
+    }
 
     @SuppressLint("ScheduleExactAlarm")
     fun scheduleAlarm(context: Context, alarmModel: AlarmModel) {
         if (!alarmModel.alarmIsActive) return
+        if (!AppPermission.ensureExactAlarmPermission(context)) return
 
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
@@ -126,13 +130,12 @@ object SoundUtils {
             }
         }
 
-        if (AppPermission.ensureExactAlarmPermission(context)) {
-            alarmManager.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                pendingIntent
-            )
-        }
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            pendingIntent
+        )
+
     }
 
     fun toggleAlarm(context: Context, alarmModel: AlarmModel, activate: Boolean) {
@@ -165,8 +168,6 @@ object SoundUtils {
         context.vibrateIndefinitely(100)
         context.stopVibration()
 
-        // reschedule all alarm again
-        Thread { scheduleAllAlarms(context, LocalStorageUtils.getAllAlarm(context)) }.start()
     }
 
     fun cancelAutoSnooze(context: Context, alarmModel: AlarmModel) {
@@ -209,10 +210,12 @@ object SoundUtils {
         if (dayIndexes.isEmpty()) {
             alarmM.alarmIsActive = false
             LocalStorageUtils.updateAlarm(context, indexOnStorage, alarmM)
-            cancelAlarm(context, alarmM)
         }
         // reschedule all alarm again
-        Thread { scheduleAllAlarms(context, LocalStorageUtils.getAllAlarm(context)) }.start()
+        Thread {
+            cancelAllAlarms(context)
+            setDelay(1000) { scheduleAllAlarms(context)  }
+        }.start()
     }
 
     @SuppressLint("ScheduleExactAlarm")
@@ -224,7 +227,7 @@ object SoundUtils {
         val intent = Intent(context, AlarmReceiver::class.java).apply {
             putExtra(KVal.ALARM_ID, alarmModel.id)
         }
-        val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        val pendingIntent = PendingIntent.getBroadcast(context, alarmModel.id + 200, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
 
         alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, snoozeTimeInMillis, pendingIntent)
     }
@@ -236,6 +239,12 @@ object SoundUtils {
         }
         ContextCompat.startForegroundService(context, serviceIntent)
         return
+    }
+
+    fun deviceIsOnRingMode(context: Context) : Boolean {
+        val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val deviceRingerMode = audioManager.ringerMode
+        return deviceRingerMode == AudioManager.RINGER_MODE_NORMAL
     }
 
     val alarmSnoozeCountMap = mutableMapOf<Int, Int>()

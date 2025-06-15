@@ -21,10 +21,13 @@
         tools:targetApi="31">
         <activity
             android:name=".views.AlarmSoundActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".views.SetAlarmActivity"
-            android:exported="false" />
+            android:configChanges="orientation|screenSize"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".views.MainAlarmActivity"
             android:exported="true">

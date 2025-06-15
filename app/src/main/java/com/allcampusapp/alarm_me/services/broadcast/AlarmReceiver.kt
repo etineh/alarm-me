@@ -23,35 +23,39 @@ class AlarmReceiver : BroadcastReceiver() {
         val alarmId = intent.getIntExtra(KVal.ALARM_ID, 0)
         val alarmM = LocalStorageUtils.getAllAlarm(context).find { it.id == alarmId } ?: AlarmModel()
 
-        when (intent.action) {
-            KVal.ACTION_STOP -> { // Stop alarm sound and cancel notification
-                SoundUtils.cancelAutoSnooze(context, alarmM)
-                SoundUtils.stopAlarmSound()
-                SoundUtils.stopVibrationOnNotify(context, alarmM)
-                SoundUtils.resetOneTimeAlarm(context, alarmM)
-                AlarmNotification.cancelNotification(context, alarmId)
-                return
-            }
-            KVal.ACTION_SNOOZE -> { // Stop alarm sound and reschedule alarm for snooze duration
-                SoundUtils.cancelAutoSnooze(context, alarmM)
-                SoundUtils.stopAlarmSound()
-                SoundUtils.stopVibrationOnNotify(context, alarmM)
-                SoundUtils.snoozeAlarm(context, alarmM)
-                AlarmNotification.cancelNotification(context, alarmId)
-                return
-            }
-            else -> {
-                AlarmNotification.showAlarmNotification(context, alarmM)
-                if ( AppPermission.isNotificationOk(context) /** && alarmNotificationIsOk **/ ) {
-                    playTone(context, alarmM)
-                    scheduleAutoSnooze(context, alarmM)
-                }
-            }
+        if (intent.action == KVal.ACTION_STOP || !alarmM.alarmIsActive) {
+            SoundUtils.cancelAutoSnooze(context, alarmM)
+            SoundUtils.stopAlarmSound()
+            SoundUtils.stopVibrationOnNotify(context, alarmM)
+            SoundUtils.resetOneTimeAlarm(context, alarmM)
+            AlarmNotification.cancelNotification(context, alarmId)
+            return
         }
+
+        if (intent.action == KVal.ACTION_SNOOZE) {
+            SoundUtils.cancelAutoSnooze(context, alarmM)
+            SoundUtils.stopAlarmSound()
+            SoundUtils.stopVibrationOnNotify(context, alarmM)
+            SoundUtils.snoozeAlarm(context, alarmM)
+            AlarmNotification.cancelNotification(context, alarmId)
+            return
+        }
+
+        AlarmNotification.showAlarmNotification(context, alarmM)
+        if ( AppPermission.isNotificationOk(context) /** && alarmNotificationIsOk **/ ) {
+            playTone(context, alarmM)
+            scheduleAutoSnooze(context, alarmM)
+        }
+
     }
 
     private fun playTone(context: Context, alarmModel: AlarmModel) {
-        if (alarmModel.sound.title == KVal.VIBRATE_ONLY) {
+
+        val userSelectedVibration = alarmModel.sound.title == KVal.VIBRATE_ONLY
+
+        val shouldVibrate = userSelectedVibration || !SoundUtils.deviceIsOnRingMode(context)
+
+        if (shouldVibrate) {
             val serviceIntent = Intent(context, AlarmService::class.java).apply {
                 putExtra(KVal.INTENT_PURPOSE, KVal.PLAY_ALARM)
                 putExtra(KVal.ALARM_ID, alarmModel.id)
@@ -60,10 +64,11 @@ class AlarmReceiver : BroadcastReceiver() {
             return
         }
 
+        // Only play sound if ringer mode is normal and user selected sound
         val soundUriString = alarmModel.sound.uri
         val soundUri = if (soundUriString != null) Uri.parse(soundUriString)
         else RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-        // Play the ringtone
+
         SoundUtils.playAlarm(context, soundUri)
     }
 
