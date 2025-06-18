@@ -2,6 +2,7 @@ package com.allcampusapp.alarm_me.services
 
 import android.app.Service
 import android.content.Intent
+import android.os.Build
 import android.os.IBinder
 import com.allcampusapp.alarm_me.constant.KVal
 import com.allcampusapp.alarm_me.extension.stopVibration
@@ -31,21 +32,28 @@ class AlarmService : Service() {
         val notification = AlarmNotification.buildNotification(
             this, alarmM, stopPendingIntent, snoozePendingIntent, contentPendingIntent
         )
-        startForeground(KVal.ALARM_NOTIFICATION_ID + alarmM.id, notification)
+
+        startForeground(alarmM.id, notification)
 
         vibrateIndefinitely()
         if (playOrPause == KVal.STOP_ALARM) {
             stopVibration()
-            stopAlarmService()
+            stopSelf() // stops the service
         }
+
+        removeNotification()
 
         return START_STICKY
     }
 
     // Call this when you want to stop vibration and notification
-    private fun stopAlarmService() {
-        stopForeground(true) // removes the notification
-        stopSelf() // stops the service
+    private fun removeNotification() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            stopForeground(STOP_FOREGROUND_REMOVE)
+        } else {
+            @Suppress("DEPRECATION")
+            stopForeground(true)
+        }
     }
 
     override fun onBind(intent: Intent?): IBinder? = null
